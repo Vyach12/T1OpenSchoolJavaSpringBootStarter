@@ -10,31 +10,40 @@
 	</parent>
 	<groupId>openschool.java</groupId>
 	<artifactId>spring-boot-starter</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>spring-boot-starter</name>
-	<description>Demo project for Spring Boot</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<springdoc.openapi.version>2.0.2</springdoc.openapi.version>
 	</properties>
 	<dependencies>
+		<!-- Spring Web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<!-- Spring AOP -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
+        <!-- Swagger -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc.openapi.version}</version>
+        </dependency>
+
+		<!-- Lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>annotationProcessor</scope>
+		</dependency>
+
+		<!-- Test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

@@ -1,4 +1,4 @@
-package openschool.java.spring_boot_starter;
+package openschool.java.springbootstarter;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
