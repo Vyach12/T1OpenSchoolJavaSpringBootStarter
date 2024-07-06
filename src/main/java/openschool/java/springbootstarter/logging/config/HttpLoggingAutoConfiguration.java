@@ -1,8 +1,9 @@
 package openschool.java.springbootstarter.logging.config;
 
 import openschool.java.springbootstarter.logging.filter.HttpLoggingFilter;
-import openschool.java.springbootstarter.logging.interceptor.HttpLoggingInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,17 +12,13 @@ import org.springframework.context.annotation.Configuration;
  * Конфигурирует фильтр и интерцептор для логирования.
  */
 @Configuration
-public class LoggingAutoConfiguration {
+@EnableConfigurationProperties(HttpLoggingProperties.class)
+@ConditionalOnProperty(prefix = "spring.http.logging", value = "enabled", havingValue = "true")
+public class HttpLoggingAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public HttpLoggingFilter httpLoggingFilter() {
-        return new HttpLoggingFilter();
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public HttpLoggingInterceptor httpLoggingInterceptor() {
-        return new HttpLoggingInterceptor();
+    public HttpLoggingFilter httpLoggingFilter(HttpLoggingProperties properties) {
+        return new HttpLoggingFilter(properties);
     }
 }

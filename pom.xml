@@ -17,7 +17,13 @@
 		<springdoc.openapi.version>2.0.2</springdoc.openapi.version>
 	</properties>
 	<dependencies>
-		<!-- Spring Web -->
+		<!-- Spring starter -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<!-- Spring starter -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
