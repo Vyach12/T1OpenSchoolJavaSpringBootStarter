@@ -2,7 +2,6 @@ package openschool.java.springbootstarter.logging.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +22,8 @@ public class HttpLoggingFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if (properties.isEnabled() && shouldLog(request.getRequestURI())) {
+        log.info("send request to URI: {}", request.getRequestURI());
+        if (properties.enabled() && shouldLog(request.getRequestURI())) {
             long startTime = System.currentTimeMillis();
 
             logRequest(request);
@@ -38,7 +38,7 @@ public class HttpLoggingFilter extends OncePerRequestFilter {
     }
 
     private boolean shouldLog(String requestURI) {
-        List<String> paths = properties.getPaths();
+        List<String> paths = properties.paths();
         if (paths == null || paths.isEmpty()) {
             return true;
         }
