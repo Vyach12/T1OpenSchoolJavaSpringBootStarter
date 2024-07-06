@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 @Slf4j
 @AutoConfiguration
 @EnableConfigurationProperties(HttpLoggingProperties.class)
-@ConditionalOnProperty(prefix = "logging", value = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = "http.logging", value = "enabled", havingValue = "true")
 public class HttpLoggingAutoConfiguration {
 
     @Bean
