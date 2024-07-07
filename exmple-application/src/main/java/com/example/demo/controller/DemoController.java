@@ -12,7 +12,7 @@ public class DemoController {
         return "Hello World";
     }
 
-    @GetMapping("/negative-hello")
+    @GetMapping("/bye")
     public String negativeHello() {
         return "bye bye";
     }

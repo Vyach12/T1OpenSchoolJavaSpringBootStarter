@@ -4,5 +4,5 @@ http:
     level: WARNING
     paths: /api/v1/hello
     format:
-      request: "Request: {url} {headers}"
-      response: "Response"
+      request: Req
+      response: Res
