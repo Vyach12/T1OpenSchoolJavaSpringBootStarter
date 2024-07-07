@@ -1,5 +1,5 @@
 org.springframework.boot.env.EnvironmentPostProcessor=\
-    openschool.java.springbootstarter.logging.init.HttpLoggingEnvironmentPostProcessor
+openschool.java.springbootstarter.logging.init.HttpLoggingEnvironmentPostProcessor
 
-org.springframework.boot.diagnostics.AbstractFailureAnalyzer=\
-    openschool.java.springbootstarter.logging.init.HttpLoggingFailureAnalyzer
+org.springframework.boot.diagnostics.FailureAnalyzer=\
+openschool.java.springbootstarter.logging.init.HttpLoggingFailureAnalyzer

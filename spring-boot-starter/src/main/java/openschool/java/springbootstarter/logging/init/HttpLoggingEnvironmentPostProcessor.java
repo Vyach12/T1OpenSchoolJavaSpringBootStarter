@@ -23,9 +23,11 @@ public class HttpLoggingEnvironmentPostProcessor implements EnvironmentPostProce
         if (enabled != null && !Boolean.TRUE.toString().equals(enabled) && !Boolean.FALSE.toString().equals(enabled)) {
             throw new HttpLoggingStartupException("Invalid value for 'http.logging.enabled'");
         }
-
-        if (logLevel != null && !logLevel.matches("TRACE|DEBUG|INFO|WARNING|ERROR")) {
-            throw new HttpLoggingStartupException("Invalid log level: " + logLevel);
+        // В случае, если будет отключено логирование не проверять след параметры
+        if(Boolean.TRUE.toString().equals(enabled)) {
+            if (logLevel != null && !logLevel.matches("TRACE|DEBUG|INFO|WARNING|ERROR")) {
+                throw new HttpLoggingStartupException("Invalid log level: " + logLevel);
+            }
         }
     }
 }

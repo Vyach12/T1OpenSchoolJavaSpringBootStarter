@@ -7,13 +7,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import openschool.java.springbootstarter.logging.config.HttpLoggingProperties;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.util.ContentCachingRequestWrapper;
+import org.springframework.web.util.ContentCachingResponseWrapper;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class HttpLoggingFilter extends OncePerRequestFilter {
@@ -49,18 +51,26 @@ public class HttpLoggingFilter extends OncePerRequestFilter {
     }
 
     private void logRequest(HttpServletRequest request) {
+        var content = new ContentCachingRequestWrapper(request);
+        String requestBody = new String(content.getContentAsByteArray(), StandardCharsets.UTF_8);
+
         String logMessage = properties.getFormat().getRequest()
                 .replace("{method}", request.getMethod())
                 .replace("{headers}", getHeaders(request).toString())
+                .replace("{body}", requestBody)
                 .replace("{url}", request.getRequestURI());
 
         logger.log(Level.parse(properties.getLevel()), logMessage);
     }
 
     private void logResponse(HttpServletResponse response, long duration) {
+        var content = new ContentCachingResponseWrapper(response);
+        String responseBody = new String(content.getContentAsByteArray(), StandardCharsets.UTF_8);
+
         String logMessage = properties.getFormat().getResponse()
                 .replace("{status}", String.valueOf(response.getStatus()))
                 .replace("{headers}", getHeaders(response).toString())
+                .replace("{body}", responseBody)
                 .replace("{duration}", String.valueOf(duration));
 
         logger.log(Level.parse(properties.getLevel()), logMessage);
