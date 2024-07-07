@@ -12,7 +12,7 @@
 Установите стартер Spring Boot HTTP Logging в ваше локальное Maven-репозитори:
 
 ``` sh
-cd /path/to/your/spring-boot-starter
+cd /spring-boot-starter
 mvn clean install 
 ```
 
@@ -60,7 +60,7 @@ http:
           - {headers}: Заголовки запроса.
           - {body}: Тело запроса (если есть).
       - Ответы (response):
-          - {status}: HTTP статус ответа (200, 404 и т.д.). 
+          - {status}: HTTP статус ответа. 
           - {headers}: Заголовки ответа. 
           - {body}: Тело ответа (если есть). 
           - {duration}: Время обработки запроса в миллисекундах.
