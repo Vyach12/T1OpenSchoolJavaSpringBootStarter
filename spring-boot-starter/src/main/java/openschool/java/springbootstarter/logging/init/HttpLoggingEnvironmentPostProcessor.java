@@ -15,8 +15,6 @@ public class HttpLoggingEnvironmentPostProcessor implements EnvironmentPostProce
 
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
-        log.info("Calling HttpLoggingEnvironmentPostProcessor");
-
         String enabled = environment.getProperty("http.logging.enabled");
         String logLevel = environment.getProperty("http.logging.level");
 
@@ -24,7 +22,7 @@ public class HttpLoggingEnvironmentPostProcessor implements EnvironmentPostProce
             throw new HttpLoggingStartupException("Invalid value for 'http.logging.enabled'");
         }
         // В случае, если будет отключено логирование не проверять след параметры
-        if(Boolean.TRUE.toString().equals(enabled)) {
+        if (Boolean.TRUE.toString().equals(enabled)) {
             if (logLevel != null && !logLevel.matches("TRACE|DEBUG|INFO|WARNING|ERROR")) {
                 throw new HttpLoggingStartupException("Invalid log level: " + logLevel);
             }

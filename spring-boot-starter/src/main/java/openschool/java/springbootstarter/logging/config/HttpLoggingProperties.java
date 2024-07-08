@@ -27,7 +27,6 @@ public class HttpLoggingProperties {
     /**
      * Уровень логирования.
      * Допустимые значения: TRACE, DEBUG, INFO, WARNING, ERROR.
-     * Выбрасывает HttpLoggingStartupException если будет указан некорретный уровень логирования.
      */
     private String level = "INFO";
     /**
