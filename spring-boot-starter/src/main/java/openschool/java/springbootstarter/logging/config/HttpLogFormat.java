@@ -21,7 +21,7 @@ public class HttpLogFormat {
      *   <li>{headers}: Заголовки запроса или ответа</li>
      *   <li>{body}: Тело запроса (если есть)</li>
      * </ul>
-     *
+     * <p>
      * Пример форматов логов:
      *
      * <pre>
@@ -38,7 +38,7 @@ public class HttpLogFormat {
      *   <li>{status}: HTTP статус ответа</li>
      *   <li>{duration}: Время обработки запроса в миллисекундах</li>
      * </ul>
-     *
+     * <p>
      * Пример форматов логов:
      *
      * <pre>
