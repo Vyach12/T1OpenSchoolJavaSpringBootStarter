@@ -21,7 +21,7 @@ mvn clean install
 ```xml
 <dependency>
     <groupId>openschool.java</groupId>
-    <artifactId>spring-boot-starter-logging</artifactId>
+    <artifactId>spring-boot-starter</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
@@ -52,7 +52,7 @@ http:
 ## Настройка
 - Enabled: Включает или отключает логирование.
 - Paths: Указывает, какие пути нужно логировать.
-- Level: Устанавливает уровень логирования (TRACE, DEBUG, INFO, WARN, ERROR).
+- Level: Устанавливает уровень логирования (TRACE, DEBUG, INFO, WARNING, ERROR).
   - Format: Настраивает формат логов для запросов и ответов.
     -  Запрос (request)
           - {method}: HTTP метод запроса (GET, POST и т.д.).
@@ -64,9 +64,3 @@ http:
           - {headers}: Заголовки ответа. 
           - {body}: Тело ответа (если есть). 
           - {duration}: Время обработки запроса в миллисекундах.
-
-### Пример настроек форматов:
-```properties
-http.logging.log-format.request={method} {url} {headers}
-http.logging.log-format.response={status} {duration}ms {headers}
-```
