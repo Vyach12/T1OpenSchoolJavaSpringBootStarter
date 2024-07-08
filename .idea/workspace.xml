@@ -5,17 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3f023554-9624-4a8a-9df3-670590454a23" name="Changes" comment="[feat]: configured spring boot starter.">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openschool/java/springbootstarter/SpringBootStarterApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openschool/java/springbootstarter/logging/config/HttpLoggingAutoConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openschool/java/springbootstarter/logging/config/HttpLoggingProperties.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openschool/java/springbootstarter/logging/filter/HttpLoggingFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/spring.factories" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/openschool/java/springbootstarter/SpringBootStarterApplicationTests.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring-boot-starter/src/main/java/openschool/java/springbootstarter/logging/util/HttpLogger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring-boot-starter/src/test/java/openschool/java/springbootstarter/logging/init/HttpLoggingEnvironmentPostProcessorTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring-boot-starter/src/test/java/openschool/java/springbootstarter/logging/util/HttpLoggerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exmple-application/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/exmple-application/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-starter/src/main/java/openschool/java/springbootstarter/logging/config/HttpLoggingAutoConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-starter/src/main/java/openschool/java/springbootstarter/logging/config/HttpLoggingAutoConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-starter/src/main/java/openschool/java/springbootstarter/logging/config/HttpLoggingProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-starter/src/main/java/openschool/java/springbootstarter/logging/config/HttpLoggingProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-starter/src/main/java/openschool/java/springbootstarter/logging/filter/HttpLoggingFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-starter/src/main/java/openschool/java/springbootstarter/logging/filter/HttpLoggingFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-starter/src/main/java/openschool/java/springbootstarter/logging/init/HttpLoggingEnvironmentPostProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-starter/src/main/java/openschool/java/springbootstarter/logging/init/HttpLoggingEnvironmentPostProcessor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +53,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/code/T1OpenSchool/T1OpenSchoolJavaSpringBootStarter/exmple-application",
+    "last_opened_file_path": "D:/code/T1OpenSchool/T1OpenSchoolJavaSpringBootStarter1/exmple-application",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -93,6 +91,8 @@
       <workItem from="1720103551470" duration="22000" />
       <workItem from="1720103584741" duration="1383000" />
       <workItem from="1720248932909" duration="4744000" />
+      <workItem from="1720360308631" duration="16000" />
+      <workItem from="1720447355411" duration="12000" />
     </task>
     <task id="LOCAL-00001" summary="[feat]: init commit">
       <option name="closed" value="true" />
@@ -123,6 +123,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="[feat]: init commit" />
