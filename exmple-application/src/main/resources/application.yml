@@ -2,6 +2,6 @@ http:
   logging:
     enabled: true
     level: WARNING
-    paths: /api/v1/external
+    paths: /api/v1/
     format:
       response: Response

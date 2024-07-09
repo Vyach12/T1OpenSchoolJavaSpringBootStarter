@@ -52,14 +52,14 @@ public class HttpLoggingFilter extends OncePerRequestFilter {
 
             Level logLevel = Level.parse(properties.getLevel());
 
-            String requestLog = logFormatter.createRequestLog(properties.getFormat().getRequest(), request);
+            String requestLog = logFormatter.createRequestLog(properties.getFormat().getIncomingRequest(), request);
             logger.log(logLevel, requestLog);
 
             long startTime = System.currentTimeMillis();
             filterChain.doFilter(request, response);
             long durationMs = System.currentTimeMillis() - startTime;
 
-            String responseLog = logFormatter.createResponseLog(properties.getFormat().getResponse(), response, durationMs);
+            String responseLog = logFormatter.createResponseLog(properties.getFormat().getIncomingResponse(), response, durationMs);
             logger.log(logLevel, responseLog);
         } else {
             filterChain.doFilter(request, response);

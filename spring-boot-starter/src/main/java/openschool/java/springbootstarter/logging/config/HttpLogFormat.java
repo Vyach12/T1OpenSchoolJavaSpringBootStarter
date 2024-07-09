@@ -28,7 +28,7 @@ public class HttpLogFormat {
      * http.logging.log-format.request=Запрос: url={url} method={method} headers={headers} body={body}
      * </pre>
      */
-    private String request = "Request: url={url} method={method} headers={headers} body={body}";
+    private String incomingRequest = "Incoming Request: url={url} method={method} headers={headers} body={body}";
     /**
      * Формат вывода логов для http ответа.
      * Поддерживаемые переменные в форматах логов запроса:
@@ -45,5 +45,8 @@ public class HttpLogFormat {
      * http.logging.log-format.response=Ответ: headers={headers} status={status} duration={duration}ms body={body}
      * </pre>
      */
-    private String response = "Response: headers={headers} body={body} status={status} duration={duration}ms";
+    private String incomingResponse = "Incoming Response: headers={headers} body={body} status={status} duration={duration}ms";
+    private String outgoingRequest = "Outgoing Request: url={url} method={method} headers={headers} body={body}";
+    private String outgoingResponse = "Outgoing Response: headers={headers} body={body} status={status} duration={duration}ms";
+
 }

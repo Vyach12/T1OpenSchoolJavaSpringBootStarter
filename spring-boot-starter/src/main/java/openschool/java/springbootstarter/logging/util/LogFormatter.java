@@ -3,13 +3,19 @@ package openschool.java.springbootstarter.logging.util;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import openschool.java.springbootstarter.logging.config.HttpLoggingProperties;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Класс для генерации строк логов HTTP запросов и ответов.
@@ -56,6 +62,42 @@ public class LogFormatter {
     }
 
     /**
+     * Генерирует строку лога для исходящего HTTP запроса.
+     *
+     * @param formatRequest Шаблон для форматирования запроса
+     * @param request       Исходящий HTTP запрос
+     * @param body          Тело исходящего запроса
+     * @return Сгенерированная строка лога для запроса
+     */
+    public String createOutgoingRequestLog(String formatRequest, HttpRequest request, byte[] body) {
+        String requestBody = new String(body, StandardCharsets.UTF_8);
+
+        return formatRequest
+                .replace("{method}", request.getMethod().toString())
+                .replace("{headers}", getHeaders(request).toString())
+                .replace("{body}", requestBody)
+                .replace("{url}", request.getURI().toString());
+    }
+
+    /**
+     * Генерирует строку лога для исходящего HTTP ответа.
+     *
+     * @param formatResponse Шаблон для форматирования ответа
+     * @param response       Исходящий HTTP ответ
+     * @return Сгенерированная строка лога для ответа
+     */
+    @SneakyThrows
+    public String createOutgoingResponseLog(String formatResponse, ClientHttpResponse response) {
+        String responseBody = new BufferedReader(new InputStreamReader(response.getBody(), StandardCharsets.UTF_8))
+                .lines()
+                .collect(Collectors.joining("\n"));
+
+        return formatResponse.replace("{status}", response.getStatusCode().toString())
+                .replace("{headers}", getHeaders(response).toString())
+                .replace("{body}", responseBody);
+    }
+
+    /**
      * Возвращает список HTTP заголовков запроса.
      *
      * @param request HTTP запрос
@@ -76,6 +118,30 @@ public class LogFormatter {
     private List<String> getHeaders(HttpServletResponse response) {
         return response.getHeaderNames().stream()
                 .map(headerName -> headerName + ": " + response.getHeader(headerName))
+                .toList();
+    }
+
+    /**
+     * Возвращает список HTTP заголовков для исходящего запроса.
+     *
+     * @param request Исходящий HTTP запрос
+     * @return Список строк, представляющих заголовки запроса
+     */
+    private List<String> getHeaders(HttpRequest request) {
+        return request.getHeaders().entrySet().stream()
+                .map(entry -> entry.getKey() + ": " + String.join(", ", entry.getValue()))
+                .toList();
+    }
+
+    /**
+     * Возвращает список HTTP заголовков для исходящего ответа.
+     *
+     * @param response Исходящий HTTP ответ
+     * @return Список строк, представляющих заголовки ответа
+     */
+    private List<String> getHeaders(ClientHttpResponse response) {
+        return response.getHeaders().entrySet().stream()
+                .map(entry -> entry.getKey() + ": " + String.join(", ", entry.getValue()))
                 .toList();
     }
 }
