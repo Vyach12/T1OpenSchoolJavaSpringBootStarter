@@ -16,10 +16,10 @@ import org.springframework.context.annotation.Bean;
 @Slf4j
 @AutoConfiguration
 @EnableConfigurationProperties(HttpLoggingProperties.class)
+@ConditionalOnProperty(prefix = "http.logging", value = "enabled", havingValue = "true")
 public class HttpLoggingAutoConfiguration {
 
     @Bean
-    @ConditionalOnProperty(prefix = "http.logging", value = "enabled", havingValue = "true")
     public HttpLoggingFilter httpLoggingFilter(HttpLoggingProperties properties) {
         log.info("Initializing HttpLoggingFilter with properties: {}", properties);
         return new HttpLoggingFilter(properties, logFormatter());

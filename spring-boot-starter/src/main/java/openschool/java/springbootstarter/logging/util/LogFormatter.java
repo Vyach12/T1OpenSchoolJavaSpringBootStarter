@@ -88,7 +88,7 @@ public class LogFormatter {
                                             ClientHttpResponse response,
                                             long durationMS) {
 
-        return formatResponse.replace("{status}", response.getStatusCode().toString())
+        return formatResponse.replace("{status}", String.valueOf(response.getStatusCode().value()))
                 .replace("{headers}", getHeaders(response).toString())
                 .replace("{duration}", String.valueOf(durationMS));
     }
@@ -130,7 +130,7 @@ public class LogFormatter {
     }
 
     /**
-     * Возвращает список HTTP заголовков для исходящего ответа.
+     * Возвращает список HTTP заголовков для ответа от исходящего запроса.
      *
      * @param response Исходящий HTTP ответ
      * @return Список строк, представляющих заголовки ответа
