@@ -29,7 +29,7 @@ public class LogFormatter {
      * @param request HTTP запрос
      * @return Сгенерированная строка лога для запроса
      */
-    public String createRequestLog(String formatRequest, HttpServletRequest request) {
+    public String createIncomingRequestLog(String formatRequest, HttpServletRequest request) {
         var content = new ContentCachingRequestWrapper(request);
         String requestBody = new String(content.getContentAsByteArray(), StandardCharsets.UTF_8);
 
@@ -47,7 +47,7 @@ public class LogFormatter {
      * @param duration Длительность обработки запроса в миллисекундах
      * @return Сгенерированная строка лога для ответа
      */
-    public String createResponseLog(String formatResponse, HttpServletResponse response, long duration) {
+    public String createIncomingResponseLog(String formatResponse, HttpServletResponse response, long duration) {
         var content = new ContentCachingResponseWrapper(response);
         String responseBody = new String(content.getContentAsByteArray(), StandardCharsets.UTF_8);
 

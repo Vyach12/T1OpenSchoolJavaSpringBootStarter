@@ -46,7 +46,7 @@ public class LogFormatterTest {
     }
 
     @Test
-    public void testCreateRequestLog() {
+    public void testCreateIncomingRequestLog() {
         when(request.getMethod()).thenReturn("GET");
         when(request.getRequestURI()).thenReturn("/test");
         when(request.getHeaderNames()).thenReturn(Collections.enumeration(List.of("header1")));
@@ -54,20 +54,20 @@ public class LogFormatterTest {
 
         String expectedLog = "GET /test [header1: value1] ";
         String format = "{method} {url} {headers} {body}";
-        String actualLog = logFormatter.createRequestLog(format, request);
+        String actualLog = logFormatter.createIncomingRequestLog(format, request);
 
         assertEquals(expectedLog, actualLog);
     }
 
     @Test
-    public void testCreateResponseLog() {
+    public void testCreateIncomingResponseLog() {
         when(response.getStatus()).thenReturn(HttpStatus.OK.value());
         when(response.getHeaderNames()).thenReturn(List.of("header1"));
         when(response.getHeader("header1")).thenReturn("value1");
 
         String expectedLog = "200 [header1: value1]  123";
         String format = "{status} {headers} {body} {duration}";
-        String actualLog = logFormatter.createResponseLog(format, response, 123);
+        String actualLog = logFormatter.createIncomingResponseLog(format, response, 123);
 
         assertEquals(expectedLog, actualLog);
     }
