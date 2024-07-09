@@ -6,8 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Optional;
 
 @Configuration
@@ -16,9 +14,9 @@ public class RestTemplateConfig {
 
     @Bean
     public RestTemplate restTemplate(Optional<HttpLoggingInterceptor> httpLoggingInterceptor) {
-        var restTemplate = new RestTemplate();
+        RestTemplate restTemplate = new RestTemplate();
         httpLoggingInterceptor.ifPresent(interceptor ->
-                restTemplate.setInterceptors(new ArrayList<>(Collections.singletonList(interceptor)))
+                restTemplate.getInterceptors().add(interceptor)
         );
         return restTemplate;
     }

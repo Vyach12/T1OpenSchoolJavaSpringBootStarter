@@ -34,8 +34,10 @@ application.properties:
 http.logging.enabled=true
 http.logging.paths=/api,/admin
 http.logging.log-level=DEBUG
-http.logging.log-format.request={method} {url}
-http.logging.log-format.response={status} {duration}ms
+http.logging.log-format.incoming-request={method} {url}
+http.logging.log-format.incoming-response={status} {duration}ms
+http.logging.log-format.outgoing-request={method} {url}
+http.logging.log-format.outgoing-response={status} {duration}ms
 ```
 
 application.yml:
@@ -46,10 +48,36 @@ http:
         paths: /api,/admin
         level: DEBUG
         format:
-            request: "{method} {url}"
-            response: "{status} {duration}ms"
+            incoming-request: "{method} {url}"
+            incoming-response: "{status} {duration}ms"
+            outgoing-request: "{method} {url}"
+            outgoing-response: "{status} {duration}ms"
 ```
-## Настройка
+
+### Конфигурация логгирования исходящих запросов
+Для логирования исходящих от приложения запросов используется HttpLoggingInterceptor, который добавляется в RestTemplate.
+RestTemplateConfig: Класс конфигурации для настройки RestTemplate с возможным подключением HttpLoggingInterceptor.
+
+В случае, если http.logging.enabled=false бин с именем httpLoggingInterceptor не будет создан.
+Пример внидрения бина:
+```java
+@Configuration
+@RequiredArgsConstructor
+public class RestTemplateConfig {
+
+    @Bean
+    public RestTemplate restTemplate(Optional<HttpLoggingInterceptor> httpLoggingInterceptor) {
+        var restTemplate = new RestTemplate();
+        httpLoggingInterceptor.ifPresent(interceptor ->
+                restTemplate.setInterceptors(new ArrayList<>(Collections.singletonList(interceptor)))
+        );
+        return restTemplate;
+    }
+}
+
+```
+
+## Параметры 
 - Enabled: Включает или отключает логирование.
 - Paths: Указывает, какие пути нужно логировать.
 - Level: Устанавливает уровень логирования (TRACE, DEBUG, INFO, WARNING, ERROR).
