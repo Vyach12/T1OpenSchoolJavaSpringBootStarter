@@ -4,4 +4,4 @@ http:
     level: WARNING
     paths: /api/v1/
     format:
-      response: Response
+      incoming-response: Response

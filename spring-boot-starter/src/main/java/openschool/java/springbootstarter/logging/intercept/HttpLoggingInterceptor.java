@@ -23,24 +23,32 @@ public class HttpLoggingInterceptor implements ClientHttpRequestInterceptor {
     @Override
     @NonNull
     public ClientHttpResponse intercept(@NonNull HttpRequest request,
-                                        byte[] body,
-                                        ClientHttpRequestExecution execution) throws IOException {
+                                         byte[] body,
+                                        @NonNull ClientHttpRequestExecution execution) throws IOException {
+
         String requestLog = logFormatter.createOutgoingRequestLog(
                 properties.getFormat().getOutgoingRequest(),
                 request,
                 body
         );
-        Level logLevel = Level.parse(properties.getLevel());
+        logger.log(Level.parse(properties.getLevel()), requestLog);
 
-        logger.log(logLevel, requestLog);
-
-        ClientHttpResponse response = execution.execute(request, body);
+        ClientHttpResponse response;
+        long startTime = System.currentTimeMillis();
+        try {
+            response = execution.execute(request, body);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Request execution failed", e);
+            throw e;
+        }
+        long durationMs = System.currentTimeMillis() - startTime;
 
         String responseLog = logFormatter.createOutgoingResponseLog(
                 properties.getFormat().getOutgoingResponse(),
-                response
+                response,
+                durationMs
         );
-        logger.log(logLevel, responseLog);
+        logger.log(Level.parse(properties.getLevel()), responseLog);
 
         return response;
     }

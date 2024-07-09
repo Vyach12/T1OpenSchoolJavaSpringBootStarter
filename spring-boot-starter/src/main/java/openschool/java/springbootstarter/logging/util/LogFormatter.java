@@ -10,12 +10,9 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Класс для генерации строк логов HTTP запросов и ответов.
@@ -87,14 +84,13 @@ public class LogFormatter {
      * @return Сгенерированная строка лога для ответа
      */
     @SneakyThrows
-    public String createOutgoingResponseLog(String formatResponse, ClientHttpResponse response) {
-        String responseBody = new BufferedReader(new InputStreamReader(response.getBody(), StandardCharsets.UTF_8))
-                .lines()
-                .collect(Collectors.joining("\n"));
+    public String createOutgoingResponseLog(String formatResponse,
+                                            ClientHttpResponse response,
+                                            long durationMS) {
 
         return formatResponse.replace("{status}", response.getStatusCode().toString())
                 .replace("{headers}", getHeaders(response).toString())
-                .replace("{body}", responseBody);
+                .replace("{duration}", String.valueOf(durationMS));
     }
 
     /**
