@@ -55,8 +55,7 @@ http:
 ```
 
 ### Конфигурация логгирования исходящих запросов
-Для логирования исходящих от приложения запросов используется HttpLoggingInterceptor, который добавляется в RestTemplate.
-RestTemplateConfig: Класс конфигурации для настройки RestTemplate с возможным подключением HttpLoggingInterceptor.
+Для логирования исходящих от приложения запросов используется HttpLoggingInterceptor.
 
 В случае, если http.logging.enabled=false бин с именем httpLoggingInterceptor не будет создан.
 Пример внидрения бина:
@@ -82,13 +81,22 @@ public class RestTemplateConfig {
 - Paths: Указывает, какие пути нужно логировать.
 - Level: Устанавливает уровень логирования (TRACE, DEBUG, INFO, WARNING, ERROR).
   - Format: Настраивает формат логов для запросов и ответов.
-    -  Запрос (request)
+    -  incoming-request
           - {method}: HTTP метод запроса (GET, POST и т.д.).
           - {url}: URL запроса.
           - {headers}: Заголовки запроса.
           - {body}: Тело запроса (если есть).
-      - Ответы (response):
+      - incoming-response:
           - {status}: HTTP статус ответа. 
           - {headers}: Заголовки ответа. 
           - {body}: Тело ответа (если есть). 
           - {duration}: Время обработки запроса в миллисекундах.
+    -  outgoing-request
+       - {method}: HTTP метод запроса (GET, POST и т.д.).
+       - {url}: URL запроса.
+       - {headers}: Заголовки запроса.
+       - {body}: Тело запроса (если есть).
+    - outgoing-response:
+        - {status}: HTTP статус ответа.
+        - {headers}: Заголовки ответа.
+        - {duration}: Время обработки запроса в миллисекундах.
